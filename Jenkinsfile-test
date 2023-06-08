@@ -6,6 +6,11 @@ pipeline {
                 sh 'mvn -B package'
             }
         }
+        stage('SonarQube TESTEANDO') {
+          withSonarQubeEnv('sonar-jenkins-pc-pega-windows') {
+            sh 'sonar-scanner'
+            }
+        }
         stage('SonarQube analysis') {
             steps {
                 script {
