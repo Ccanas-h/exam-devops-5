@@ -10,8 +10,8 @@ pipeline {
             steps {
                 script {
                     sh "/var/jenkins_home/sonar/bin/sonar-scanner \
-                        -Dsonar.projectKey=pipeline-jenkinsfile-grupo5 \
-                        -Dsonar.projectName=pipeline-jenkinsfile-grupo5 \
+                        -Dsonar.projectKey=sonar-examen-final \
+                        -Dsonar.projectName=sonar-examen-final \
                         -Dsonar.scm.disabled=true \
                         -Dsonar.sources=. \
                         -Dsonar.language=java \
@@ -19,7 +19,7 @@ pipeline {
                         -Dsonar.sourceEncoding=UTF-8 \
                         -Dsonar.host.url=http://localhost:9000 \
                         -Dsonar.exclusions=src/test/java/****/*.java \
-                        -Dsonar.login=sqp_45101fe41dff4aab7763f24ef2aff50d272ea4fe"
+                        -Dsonar.login=sqp_7bb28fb21d9dc170535707dc13adcd497a5f2c44"
                 }
             }
         }
