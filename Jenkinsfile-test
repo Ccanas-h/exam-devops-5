@@ -9,7 +9,7 @@ pipeline {
         stage('SonarQube analysis') {
             steps {
                 script {
-                    sh "/var/jenkins_home/sonar/bin/sonar-scanner \
+                    sh "sonar-scanner \
                         -Dsonar.projectKey=sonar-examen-final \
                         -Dsonar.projectName=sonar-examen-final \
                         -Dsonar.scm.disabled=true \
