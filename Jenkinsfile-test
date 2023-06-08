@@ -19,7 +19,7 @@ pipeline {
                         -Dsonar.sourceEncoding=UTF-8 \
                         -Dsonar.host.url=http://192.168.1.129:9000 \
                         -Dsonar.exclusions=src/test/java/****/*.java \
-                        -Dsonar.login=sqp_06f2999255f92dedc7f4b2bcc5e5eac5bc732c8a"
+                        -Dsonar.login=sqp_880dfd176a12cdd915a98b68aaaec517b4e1f1d1"
                 }
             }
         }
