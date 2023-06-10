@@ -6,11 +6,10 @@ pipeline {
                 sh 'mvn -B package'
             }
         }
-        
         stage('SonarQube analysis') {
             steps {
                 script {
-                    withSonarQubeEnv('sonarqube-9.9') {
+                    withSonarQubeEnv('sonarqube-8.9') {
                         sh '''mvn sonar:sonar \
                             -Dsonar.projectKey=sonar-examen-final \
                             -Dsonar.projectName=sonar-examen-final \
@@ -22,44 +21,6 @@ pipeline {
                             -Dsonar.host.url=http://192.168.1.126:9000 \
                             -Dsonar.exclusions=src/test/java/***/.java \
                             -Dsonar.login=sqp_ce00be5d05524729f27c0c0027be94489c0d30df'''
-                    }
-                }
-            }
-        }
-        
-        stage("Publish to Nexus Repository Manager") {
-            steps {
-                script {
-                    pom = readMavenPom file: "pom.xml"
-                    filesByGlob = findFiles(glob: "target/*.${pom.packaging}")
-                    
-                    echo "${filesByGlob[0].name} ${filesByGlob[0].path} ${filesByGlob[0].directory} ${filesByGlob[0].length} ${filesByGlob[0].lastModified}"
-                    
-                    artifactPath = filesByGlob[0].path
-                    artifactExists = fileExists artifactPath
-                    
-                    if (artifactExists) {
-                        echo "*** File: ${artifactPath}, group: ${pom.groupId}, packaging: ${pom.packaging}, version ${pom.version}"
-                        
-                        nexusArtifactUploader(
-                            nexusVersion: "nexus3",
-                            protocol: "http",
-                            nexusUrl: "192.168.1.126:8081",
-                            groupId: pom.groupId,
-                            version: pom.version,
-                            repository: "pipeline-jenkinsfile-grupo5",
-                            credentialsId: "nexus-id-cristobal",
-                            artifacts: [
-                                [
-                                    artifactId: pom.artifactId,
-                                    classifier: '',
-                                    file: artifactPath,
-                                    type: pom.packaging
-                                ]
-                            ]
-                        )
-                    } else {
-                        error "*** File: ${artifactPath}, could not be found"
                     }
                 }
             }
