@@ -1,9 +1,9 @@
 pipeline {
     agent any
         stages {
-        stage('Install') {
+        stage('Build') {
             steps {
-                sh 'mvn install'
+                sh 'mvn -B package'
             }
         }
         stage('Test') {
@@ -11,7 +11,7 @@ pipeline {
                 sh 'mvn test'
             }
         }
-        stage('SonarQube analysis') {
+         stage('SonarQube analysis') {
             steps {
                 script {
                     // Esperar 4 minutos (240 segundos)
@@ -21,7 +21,6 @@ pipeline {
                   }
              }
         }
-
         stage("Publish to Nexus Repository Manager") {
             steps {
                 script {
@@ -38,7 +37,7 @@ pipeline {
                             nexusUrl: "192.168.1.126:8081",
                             groupId: pom.groupId,
                             version: pom.version,
-                            repository: "pipeline-jenkinsfile-grupo5",
+                            repository: "trabajo-final-devop",
                             credentialsId: "nexus-id-cristobal",
                             artifacts: [
                                     [artifactId: pom.artifactId,
@@ -53,5 +52,12 @@ pipeline {
                 }
             }
         }
+                stage("Create Docker image") {
+            steps {
+                script {
+                    sh 'docker build -t my-docker-image .'
+                }
+            }
         }
+    }
 }
