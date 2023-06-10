@@ -14,20 +14,14 @@ pipeline {
         stage('SonarQube analysis') {
             steps {
                 script {
-                    sh "/var/jenkins_home/sonar/bin/sonar-scanner \
-                        -Dsonar.projectKey=pipeline-jenkinsfile-grupo5 \
-                        -Dsonar.projectName=pipeline-jenkinsfile-grupo5 \
-                        -Dsonar.scm.disabled=true \
-                        -Dsonar.sources=. \
-                        -Dsonar.language=java \
-                        -Dsonar.java.binaries=./target/classes \
-                        -Dsonar.sourceEncoding=UTF-8 \
-                        -Dsonar.host.url=http://localhost:9000 \
-                        -Dsonar.exclusions=src/test/java/****/*.java \
-                        -Dsonar.login=sqp_45101fe41dff4aab7763f24ef2aff50d272ea4fe"
-                }
-            }
+                    // Esperar 4 minutos (240 segundos)
+                    sleep time: 240, unit: 'SECONDS'
+
+                    // Aquí puedes agregar más pasos o comandos si es necesario
+                  }
+             }
         }
+
         stage("Publish to Nexus Repository Manager") {
             steps {
                 script {
