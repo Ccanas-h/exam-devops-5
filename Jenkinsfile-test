@@ -6,10 +6,18 @@ pipeline {
                 sh 'mvn -B package'
             }
         }
-                stage("Create Docker image") {
+                stage("Start Docker") {
             steps {
                 script {
-                    sh 'docker build -t my-docker-image .'
+                    sh 'service docker start'
+                }
+            }
+        }
+        stage("Create Docker image") {
+            steps {
+                script {
+                    sh "/var/jenkins_home/workspace/Jenkins-SonarQ-Nexus-GithubWebhook-Ngrok-Slack-Pipeline/target/ \
+                        sudo docker build -t imagen-artefacto ."
                 }
             }
         }
