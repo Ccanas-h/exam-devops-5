@@ -15,7 +15,7 @@ pipeline {
             steps {
                 script {
                     // Esperar 4 minutos (240 segundos)
-                    sleep time: 10, unit: 'SECONDS'
+                    sleep time: 240, unit: 'SECONDS'
 
                     // Aquí puedes agregar más pasos o comandos si es necesario
                   }
@@ -55,7 +55,7 @@ pipeline {
                 stage("Create Docker image") {
             steps {
                 script {
-                   sleep time: 10, unit: 'SECONDS'
+                   sleep time: 33, unit: 'SECONDS'
                 }
             }
         }
