@@ -9,7 +9,7 @@ pipeline {
         stage("Create Docker image") {
             steps {
                 script {
-                    sh 'cd C:/ProgramData/Jenkins/.jenkins/workspace/trabajo-final-devops/target && docker build -t imagen-artefacto -f Dockerfile .'
+                    sh 'cd C:/ProgramData/Jenkins/.jenkins/workspace/trabajo-final-devops/target && docker build -t imagen-artefacto -f ./Dockerfile .'
                 }
             }
         }
