@@ -4,6 +4,7 @@ pipeline {
         stage('Build package') {
             steps {
                 sh 'mvn -B package'
+                sh "/var/jenkins_home/workspace/Jenkins-SonarQ-Nexus-GithubWebhook-Ngrok-Slack-Pipeline/target/ \
             }
         }
         stage('Junit Test on Suite') {
