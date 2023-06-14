@@ -6,13 +6,6 @@ pipeline {
                 sh 'mvn -B package'
             }
         }
-                stage("Start Docker") {
-            steps {
-                script {
-                    sh 'service docker start'
-                }
-            }
-        }
         stage("Create Docker image") {
             steps {
                 script {
