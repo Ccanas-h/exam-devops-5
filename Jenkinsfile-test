@@ -1,22 +1,16 @@
 pipeline {
     agent any
-    stages {
-        stage('SonarQube analysis') {
+        stages {
+        stage('Build') {
+            steps {
+                sh 'mvn -B package'
+            }
+        }
+
+                stage("Create Docker image") {
             steps {
                 script {
-                    withSonarQubeEnv('sonarqube-9.9') {
-                        sh '''mvn sonar:sonar \
-                            -Dsonar.projectKey=sonar-examen-final \
-                            -Dsonar.projectName=sonar-examen-final \
-                            -Dsonar.scm.disabled=true \
-                            -Dsonar.sources=. \
-                            -Dsonar.language=java \
-                            -Dsonar.java.binaries=./target/classes \
-                            -Dsonar.sourceEncoding=UTF-8 \
-                            -Dsonar.host.url=http://192.168.1.126:9000 \
-                            -Dsonar.exclusions=src/test/java/***/.java \
-                            -Dsonar.login=sqp_ce00be5d05524729f27c0c0027be94489c0d30df'''
-                    }
+                    sh 'docker build -t my-docker-image .'
                 }
             }
         }
