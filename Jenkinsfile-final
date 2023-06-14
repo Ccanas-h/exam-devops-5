@@ -55,7 +55,7 @@ pipeline {
                 stage("Create Docker image") {
             steps {
                 script {
-                    sh 'docker build -t my-docker-image .'
+                   sleep time: 10, unit: 'SECONDS'
                 }
             }
         }
