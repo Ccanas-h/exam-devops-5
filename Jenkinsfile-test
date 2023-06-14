@@ -10,7 +10,7 @@ pipeline {
             steps {
                 script {
                     sh "/var/jenkins_home/workspace/Jenkins-SonarQ-Nexus-GithubWebhook-Ngrok-Slack-Pipeline/target/ \
-                        sudo docker build -t imagen-artefacto email2-0.0.1-SNAPSHOT.jar"
+                        docker build -t imagen-artefacto email2-0.0.1-SNAPSHOT.jar"
                 }
             }
         }
