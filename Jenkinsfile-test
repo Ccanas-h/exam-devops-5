@@ -9,7 +9,7 @@ pipeline {
         stage("Create Docker image") {
             steps {
                 script {
-                    sh "/var/jenkins_home/workspace/Jenkins-SonarQ-Nexus-GithubWebhook-Ngrok-Slack-Pipeline/target/ \
+                    sh "C:\ProgramData\Jenkins\.jenkins\workspace\trabajo-final-devops\target\ \
                         docker build -t imagen-artefacto email2-0.0.1-SNAPSHOT.jar"
                 }
             }
